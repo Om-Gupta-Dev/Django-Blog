@@ -6,6 +6,10 @@ from django.urls import reverse
 from django.utils import timezone
 # Create your models here.
 
+class CustomManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status='published')
+
 class Post(models.Model):
     STATUS_CHOICES = (('draft','Draft') , ('published','Published'))
     title = models.CharField(max_length=256)
@@ -16,6 +20,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    objects = CustomManager()
 
     class Meta:
         ordering = ('-publish',)
@@ -24,8 +29,8 @@ class Post(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("post_detail", args=[self.publish.year,self.publish.strftime('%m'),
-                                            self.publish.strftime('%d'),self.slug ])
+        return reverse("post_detail", kwargs={'year':self.publish.year,'month':int(self.publish.strftime('%m')),\
+            'day':int(self.publish.strftime('%d')),'post':self.slug })
     
     
     
