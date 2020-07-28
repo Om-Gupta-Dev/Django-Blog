@@ -1,9 +1,11 @@
 {% extends "Blog/base.html" %}
 
-{% block title %} Blog..{% endblock %}
+{% block title %} Blog...{% endblock %}
 
-{% block body %}
-    <h1> {{post.title}} </h1>
-    <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
-    <p> {{post.body|linebreaks}} </p>
-{% endblock %}
+{% for post in post_list %}
+    {% block body %}
+        <h1> {{post.title}} </h1>
+        <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
+        <p> {{post.body|linebreaks}} </p>
+    {% endblock %}
+{% endfor %}

@@ -6,7 +6,7 @@
     <h1> Blog Project </h1><hr>
     <div class="container-fluid row">
         <div class="container-fluid col-md-7">
-            {% for post in posts %}
+            {% for post in post_list %}
                 <div class="container-fluid ml-3">
                     <a href="{{post.get_absolute_url}}"> <h1> {{post.title}} </h1> </a>
                     <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
@@ -15,16 +15,16 @@
             {% endfor %}
         </div>
         <div class="container-fluid col-md-5">
-            {% for post in posts %}
+            {% for post in post_list %}
                 <div class="container-fluid ml-3">
                     <a href="#"> <h1> {{post.title}} </h1> </a>
                     <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
                     <p> {{ post.body|truncatewords:50}} </p>
                 </div>
             {% endfor %}
-            <div class="paginator">
-                Page {{page.number}} of {{page.paginator.num_pages}}
-            </div>
+            
+            {% include "Blog/paginator.html" with page=page_obj %}
+            {{posts}}
         </div>
     </div>
     

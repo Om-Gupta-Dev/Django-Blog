@@ -19,6 +19,6 @@ from django.urls import path
 from Blog import views
 
 urlpatterns = [
-    path('', views.index ),
+    path('', views.Paginator.as_view() ),
     path('<int:year>/<int:month>/<int:day>/<slug:post>', views.post_detail_view,name = 'post_detail' ),
 ]
