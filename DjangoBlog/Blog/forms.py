@@ -3,5 +3,5 @@ from django import forms
 class EmailSendForm(forms.Form):
     name = forms.CharField()
     email = forms.EmailField()
-    to = forms.CharField()
+    to = forms.EmailField()
     comments = forms.CharField(required=False, widget=forms.Textarea)

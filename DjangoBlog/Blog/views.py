@@ -36,7 +36,10 @@ def MailSendView(request, id):
         form = EmailSendForm(request.POST)
         if form.is_valid():
             values = form.cleaned_data
-            send_mail('Subject', values['comments'], values['name'], [values['to']], fail_silently=False )
+            subject = f"{values['name']}({values['email']}) recommends you to read {post.title} "
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            message = f"Read Post At:\n{post_url}\n\n{values['name']}'s Comment:\n{values['comments']}"
+            send_mail(subject, message, values['email'], [values['to']], fail_silently=False , )
             sent = True
     else:
         form = EmailSendForm()
@@ -73,3 +76,8 @@ def MailSendView(request, id):
 # EMAIL_HOST_USER = "UserName"
 # EMAIL_HOST_PASSWORD = "PASSWORD"
 # EMAIL_USE_TLS = True 
+
+
+# request.build_absolute_uri() will give the page link from which whichthe post is shared 
+# Class Post contains a function get_absolute_url() 
+# by using post.get_absolute_url() function we will get the actual post link 

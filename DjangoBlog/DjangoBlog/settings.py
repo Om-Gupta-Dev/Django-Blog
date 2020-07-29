@@ -28,7 +28,9 @@ SECRET_KEY = 'v)=n8&h5#+h*)pjs*2-xdt#ei+r_tjf%b-^=i=$n^0h@53fdr5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.104']
+# Accessing Django App From other devices on web 
+# Run as python manage.py runserver 192.168.0.104:8585
 
 
 # Application definition
@@ -133,7 +135,7 @@ STATICFILES_DIRS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'Username'
-EMAIL_HOST_PASSWORD = 'Password'
+EMAIL_HOST_USER = 'om.gupta.dev@gmail.com'
+EMAIL_HOST_PASSWORD = 'om+gupta+dev'
 EMAIL_USE_TLS = True 
 EMAIL_USE_SSL = False 
