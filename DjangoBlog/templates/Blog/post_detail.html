@@ -2,10 +2,10 @@
 
 {% block title %} Blog...{% endblock %}
 
-{% for post in post_list %}
-    {% block body %}
-        <h1> {{post.title}} </h1>
-        <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
-        <p> {{post.body|linebreaks}} </p>
-    {% endblock %}
-{% endfor %}
+{% block body %}
+    <h1> {{post.title}} </h1>
+    <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
+    <p> {{post.body|linebreaks}} </p>
+    <a href="/{{post.id}}/share" class="btn btn-lg btn-danger"> Share Post by Email </a>
+{% endblock %}
+

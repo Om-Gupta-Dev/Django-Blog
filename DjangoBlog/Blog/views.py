@@ -26,6 +26,23 @@ def post_detail_view(request,year,month,day,post):
     #                          publish__month=month,publish__day=day)
     return render(request,'Blog/post_detail.html',{'post':post})
 
+from django.core.mail import send_mail
+from Blog.forms import EmailSendForm
+
+def MailSendView(request, id):
+    post = get_object_or_404(Post, id=id, status='published')
+    sent = False
+    if request.method == "POST":
+        form = EmailSendForm(request.POST)
+        if form.is_valid():
+            values = form.cleaned_data
+            send_mail('Subject', values['comments'], values['name'], [values['to']], fail_silently=False )
+            sent = True
+    else:
+        form = EmailSendForm()
+    return render(request, 'Blog/sendbymail.html', {'form':form, 'post':post, 'sent':sent})
+
+
 # Pagination using Class Based Views:
 # -----------------------------------
 # class Paginator(ListView):
@@ -33,6 +50,8 @@ def post_detail_view(request,year,month,day,post):
 #     paginate_by = 1
 #     model = Post
 #     template_name = 'Blog/index.html'
+
+# NOTE: In Class Based Views if we pass page=1000 i.e not the page number it will give 404 but in this Function Based View it returns last page 
 
 # Sending mail via django:
 # ------------------------
