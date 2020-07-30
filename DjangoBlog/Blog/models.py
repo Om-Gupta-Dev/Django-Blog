@@ -31,7 +31,21 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={'year':self.publish.year,'month':int(self.publish.strftime('%m')),\
             'day':int(self.publish.strftime('%d')),'post':self.slug })
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post ,related_name = 'comments', on_delete=models.CASCADE)
+    name = models.CharField(max_length = 50)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
     
+    class Meta:
+        ordering = ('-created',)
+        
+    def __str__(self):
+        return f"Commented By {self.name} on {self.created}"
     
     
 # ----------------------Dropdown Choice Field 

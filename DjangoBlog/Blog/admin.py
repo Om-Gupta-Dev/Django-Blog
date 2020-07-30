@@ -11,9 +11,16 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status','publish']
     prepopulated_fields = {'slug':('title',)}                    
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name','email','post']
+    search_fields = ('name','email','body')
+    list_filter = ['active','created','updated']
+
 # Register your models here.
 
 admin.site.register(Post , PostAdmin)
+
+admin.site.register(Comment , CommentAdmin)
 
 # list_filter = ['status','author']
 # shows a filtering panel at right side in the admin page on the basis of status and author 

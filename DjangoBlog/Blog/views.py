@@ -2,8 +2,9 @@ from django.shortcuts import render , get_object_or_404
 
 from django.core.paginator import Paginator , PageNotAnInteger , EmptyPage
 from django.views.generic import ListView
-from Blog.models import Post
+from Blog.models import *
 
+from Blog.forms import *
 # Create your views here.
 
 def index(request):
@@ -24,6 +25,18 @@ def post_detail_view(request,year,month,day,post):
     # or 
     # post = Post.objects.get(slug=post,status='published',publish__year=year,
     #                          publish__month=month,publish__day=day)
+    
+    comments = post.comments.filter(active=True)
+    cSubmit = False
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit = False)
+            new_comment.post = post
+            new_comment.save()
+            cSubmit = True
+    else:
+        form = CommentForm()
     return render(request,'Blog/post_detail.html',{'post':post})
 
 from django.core.mail import send_mail
