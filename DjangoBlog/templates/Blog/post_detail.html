@@ -3,9 +3,37 @@
 {% block title %} Blog...{% endblock %}
 
 {% block body %}
-    <h1> {{post.title}} </h1>
-    <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
-    <p> {{post.body|linebreaks}} </p>
-    <a href="/{{post.id}}/share" class="btn btn-lg btn-danger"> Share Post by Email </a>
+    <div class="container">
+        <h1> {{post.title}} </h1>
+        <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
+        <p> {{post.body|linebreaks}} </p>
+        <a href="/{{post.id}}/share" class="btn btn-lg btn-danger"> Share Post by Email </a>
+
+        {% with comments.count as comment_count %}
+            <h2 class="mt-3 text-warning">{{comment_count}} Comment{{comment_count|pluralize}}</h2>
+        {% endwith %}
+
+        {% if comments %}
+            {% for comment in comments %}
+                <p class="mb-1 mt-3 text-primary font-weight-bold">Comment {{forloop.counter}} by {{comment.name}} on {{comment.created}}</p>
+                <p class="ml-3 text-success font-italic font-weight-bold">{{comment.body}}</p>
+                <hr class="bg-warning">
+            {% endfor %}
+        {% else %}
+            <p class="ml-3 text-success font-italic font-weight-bold">There are no Comments Yet.. </p>
+        {% endif %}
+
+        {% if csubmit %}
+            <h2>Your Comment Added Successfully</h2>
+        {% else %}
+        <h3 class="text-danger font-italic">Add Your Own Comment Here Below.</h3>
+            <form method="post">
+                {{form.as_p}}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-success">Submit Comment </button>
+            </form>
+        {% endif %}
+    </div> 
+    
 {% endblock %}
 

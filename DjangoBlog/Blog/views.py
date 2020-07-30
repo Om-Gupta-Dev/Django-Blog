@@ -37,10 +37,9 @@ def post_detail_view(request,year,month,day,post):
             cSubmit = True
     else:
         form = CommentForm()
-    return render(request,'Blog/post_detail.html',{'post':post})
+    return render(request,'Blog/post_detail.html',{'post':post,'form':form,'comments':comments,'csubmit':cSubmit})
 
 from django.core.mail import send_mail
-from Blog.forms import EmailSendForm
 
 def MailSendView(request, id):
     post = get_object_or_404(Post, id=id, status='published')
@@ -51,6 +50,7 @@ def MailSendView(request, id):
             values = form.cleaned_data
             send_mail('Subject', values['comments'], values['name'], [values['to']], fail_silently=False )
             sent = True
+    
     else:
         form = EmailSendForm()
     return render(request, 'Blog/sendbymail.html', {'form':form, 'post':post, 'sent':sent})
