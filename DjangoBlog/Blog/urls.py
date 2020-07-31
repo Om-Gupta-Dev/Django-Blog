@@ -20,6 +20,7 @@ from Blog import views
 
 urlpatterns = [
     path('', views.index ),
+    path('tag/<slug:tag_slug>/', views.index, name='post_list_by_tag_name' ),
     path('<int:id>/share', views.MailSendView),
     path('<int:year>/<int:month>/<int:day>/<slug:post>', views.post_detail_view,name = 'post_detail' ),
 ]

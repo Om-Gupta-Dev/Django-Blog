@@ -3,12 +3,17 @@ from django.shortcuts import render , get_object_or_404
 from django.core.paginator import Paginator , PageNotAnInteger , EmptyPage
 from django.views.generic import ListView
 from Blog.models import *
+from taggit.models import Tag
 
 from Blog.forms import *
 # Create your views here.
 
-def index(request):
+def index(request,tag_slug=None):
     posts = Post.objects.all()
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = posts.filter(tags__in=[tag])
     paginator = Paginator(posts, 1)
     page_number = request.GET.get('page')
     try:
@@ -17,7 +22,7 @@ def index(request):
         posts = paginator.page(1)
     except EmptyPage:   #last page if not found
         posts = paginator.page(paginator.num_pages)
-    return render(request , 'Blog/index.html' , {'posts':posts})
+    return render(request , 'Blog/index.html' , {'posts':posts, 'tag':tag})
 
 def post_detail_view(request,year,month,day,post):
     post = get_object_or_404(Post,slug=post,status='published',publish__year=year,
