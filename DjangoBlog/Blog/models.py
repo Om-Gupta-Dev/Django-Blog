@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 from django.urls import reverse
 
@@ -21,6 +22,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     objects = CustomManager()
+    tags = TaggableManager()
 
     class Meta:
         ordering = ('-publish',)

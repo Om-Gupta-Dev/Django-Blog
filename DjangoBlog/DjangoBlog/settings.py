@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Blog',
+    'taggit',       #pip install django-taggit
 ]
 
 MIDDLEWARE = [

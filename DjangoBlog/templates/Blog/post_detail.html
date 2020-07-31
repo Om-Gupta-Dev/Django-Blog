@@ -16,21 +16,36 @@
         {% if comments %}
             {% for comment in comments %}
                 <p class="mb-1 mt-3 text-primary font-weight-bold">Comment {{forloop.counter}} by {{comment.name}} on {{comment.created}}</p>
-                <p class="ml-3 text-success font-italic font-weight-bold">{{comment.body}}</p>
+                <p class="ml-2 text-success font-weight-bold">👍<span class="ml-2 text-success font-italic">{{comment.body}}</span></p>
                 <hr class="bg-warning">
             {% endfor %}
         {% else %}
-            <p class="ml-3 text-success font-italic font-weight-bold">There are no Comments Yet.. </p>
+        <p class="ml-2 text-success font-weight-bold">😥<span class="ml-2 text-success font-italic">There are no Comments Yet.. </span></p>
         {% endif %}
 
         {% if csubmit %}
-            <h2>Your Comment Added Successfully</h2>
+            <h2 class="text-danger mb-5">👏Your Comment Added Successfully</h2>
         {% else %}
         <h3 class="text-danger font-italic">Add Your Own Comment Here Below.</h3>
             <form method="post">
-                {{form.as_p}}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-outline-success">Submit Comment </button>
+                <div class="container row">
+                    <div class="container mt-3 col-md-6">
+                        <label for="id_name" class="ml-2 mr-3 text-success font-weight-bold">Name :</label><br>{{form.name}}
+                    </div>
+                    <div class="container mt-3 col-md-6">
+                        <label for="id_email" class="ml-2 text-success font-weight-bold">Email :</label><br>{{form.email}}
+                    </div>
+                </div>
+                <div class="container row">
+                    <div class="container col-md-12">
+                        <label for="id_body" class="ml-2 mr-3 text-success font-weight-bold align-content-center">Comment :</label><br>
+                        {{form.body}}
+                    </div>
+                    
+                </div>
+                <button type="submit" class="mr-5 mt-2 mb-5 btn btn-outline-success float-right">Submit Comment </button>
+                
             </form>
         {% endif %}
     </div> 
