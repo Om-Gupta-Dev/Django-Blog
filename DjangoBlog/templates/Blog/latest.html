@@ -1,0 +1,6 @@
+
+<ul>
+    {% for post in latest %}
+        <li class="text-warning" ><a href="{{ post.get_absolute_url }}" class="text-warning" >{{post.title}}</a></li>
+    {% endfor %}
+</ul>

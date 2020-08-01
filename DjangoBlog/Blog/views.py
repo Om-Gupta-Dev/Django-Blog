@@ -91,3 +91,16 @@ def MailSendView(request, id):
 # EMAIL_HOST_USER = "UserName"
 # EMAIL_HOST_PASSWORD = "PASSWORD"
 # EMAIL_USE_TLS = True 
+
+
+# Making Custom Template Tags
+
+# 3 utility functions to define our own custom template tags 
+
+# simple_tag: perform some processing and returns a string 
+# inclusion_tag: perform some processing and returns a rendered template includes the rendered template or in other words returns some html code
+# assingment_tag: perform some processing and assigns the result to the variable in the context but removed in django2.0 
+# simple_tag can be used instead of assingment_tag
+
+# 1. make a folder named as templatetags inside application folder 
+# 2. inside templatetags folder make 2 files 1. __init__.py and second any *.py file to store custom template tags 
