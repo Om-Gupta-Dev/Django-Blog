@@ -1,9 +1,11 @@
-<div class="paginator">    
-    {% if page.has_previous %}
-        <a href="?page={{page.previous_page_number}}"> Previous </a>
-    {% endif %}
-    Page {{page.number}} of {{page.paginator.num_pages}} 
-    {% if page.has_next %}
-        <a href="?page={{page.next_page_number}}"> Next </a>
-    {% endif %}
+<div class="container align-content-center paginator">   
+    <div class="container row">
+        {% if page.has_previous %}
+            <a href="?page={{page.previous_page_number}}" class="btn btn-success"> Previous </a>
+        {% endif %}
+        <h4 class="mx-3 mt-1">Page {{page.number}} of {{page.paginator.num_pages}} </h4>
+        {% if page.has_next %}
+            <a href="?page={{page.next_page_number}}" class="btn btn-success mb-5"> Next </a>
+        {% endif %}
+    </div> 
 </div>

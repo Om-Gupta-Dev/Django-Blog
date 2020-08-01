@@ -3,14 +3,14 @@
 {% block title %} Blog..{% endblock %}
 
 {% block body %}
-    <h1> Blog Project </h1><hr>
+    <h1 class=" text-center"> Blog Project </h1><hr class="bg-dark mx-5">
     <div class="container-fluid row">
         <div class="container-fluid col-md-7">
             {% if tag %}
                 <h2>Posts Related to "{{tag.name}}"</h2>
             {% endif %}
             {% for post in posts %}
-                <div class="container-fluid ml-3">
+                <div class=" ml-3">
                     <a href="{{post.get_absolute_url}}"> <h1> {{post.title}} </h1> </a>
                     <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
                     <p class="text-danger font-weight-bold">Tags : 
@@ -22,17 +22,14 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="container-fluid col-md-5">
-            {% for post in posts %}
-                <div class="container-fluid ml-3">
-                    <a href="#"> <h1> {{post.title}} </h1> </a>
-                    <p class="font-italic text-success"> Published on {{post.publish}} by {{post.author|title}} </p>
-                    <p> {{ post.body|truncatewords:50}} </p>
-                </div>
-            {% endfor %}
-            
-            {% include "Blog/paginator.html" with page=posts %}
-        </div>
+        <div class="container-fluid col-md-5 bg-dark">
+            <h1 class=" text-white text-center">Om Gupta's Blog</h1><hr class="bg-light">
+            <p class="text-white">This is a sample blog made with django for learning Django. Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, cum iure. Recusandae itaque ex, beatae veniam consequatur amet minus placeat?</p>
+            <p class="text-white">You will get latest updates about every topic. Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit laborum assumenda pariatur voluptates tempora mollitia asperiores fugiat iusto doloribus consequatur.</p>
+            <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas deserunt dolorum, dolor fugiat culpa iste blanditiis ab quod enim. Suscipit dicta quia soluta voluptatum, cupiditate expedita cum distinctio! Quaerat nemo, a ducimus incidunt illo sequi eaque possimus porro quasi quos!</p>
+            <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas deserunt dolorum, dolor fugiat culpa iste blanditiis ab quod enim. Suscipit dicta quia soluta voluptatum, cupiditate expedita cum distinctio! Quaerat nemo, a ducimus incidunt illo sequi eaque possimus porro quasi quos!</p>
+        </div>        
     </div>
+    {% include "Blog/paginator.html" with page=posts %}
     
 {% endblock body %}

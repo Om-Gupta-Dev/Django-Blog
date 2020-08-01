@@ -9,11 +9,26 @@
         {% if sent %}
             <h1>Post {{post.title}} Sent Successfully </h1>
         {% else %}
-            <h1>Share {{post.title}} by Email..</h1><hr>
+            <h1>Share {{post.title}} by Email..</h1><hr class=" bg-warning">
             <form method="post">
-                {{ form.as_p }}
+                <div class="container row mt-3">
+                    <div class="container mt-3 col-md-4">
+                        <label for="id_name" class="ml-2 width-100 text-success font-weight-bold">Name :</label><br>{{form.name}}
+                    </div>
+                    <div class="container mt-3 col-md-4">
+                        <label for="id_email" class="ml-2 width-100 text-success font-weight-bold">Email :</label><br>{{form.email}}
+                    </div>
+                    <div class="container mt-3 col-md-4">
+                        <label for="id_to" class="ml-2 width-100 text-success font-weight-bold">To:</label><br>{{form.email}}
+                    </div>
+                </div>
+                <div class="container row mt-3">
+                    <div class="container col-md-12">
+                        <label for="id_body" class="ml-2 mr-3 text-success font-weight-bold align-content-center">Comment :</label><br>
+                        {{form.comments}}
+                    </div>
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Send..</button>
+                <button type="submit" class="mr-5 mt-2 mb-5 ml-auto btn btn-outline-danger rounded">Send..</button>
             </form>
         {% endif %}
     </div>
